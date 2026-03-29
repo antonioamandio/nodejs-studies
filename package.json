@@ -1,0 +1,19 @@
+{
+    "name": "nodejs-studies",
+    "version": "1.0.0",
+    "description": "",
+    "bugs": {
+        "url": "https://github.com/antonioamandio/nodejs-studies/issues"
+    },
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/antonioamandio/nodejs-studies.git"
+    },
+    "license": "ISC",
+    "author": "António Amândio",
+    "type": "module",
+    "main": "server.js",
+    "scripts": {
+        "dev": "node --watch src/server.js"
+    }
+}
