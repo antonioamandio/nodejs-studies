@@ -1,19 +1,12 @@
 import http from 'node:http'
+import { json } from './middlewares/json.js'
 
 const users = []
 
 const server = http.createServer(async (req, res) => {
     const { method, url } = req
 
-    const buf = []
-
-    for await (const chunck of req) buf.push(chunck)
-
-    req.body = Buffer.concat(buf).toString()
-
-    if (req.body) req.body = JSON.parse(req.body)
-
-    console.log(req.body)
+    await json(req, res)
 
     if (method === 'GET' && url === '/users') {
         return res
@@ -30,7 +23,7 @@ const server = http.createServer(async (req, res) => {
             email,
         })
 
-        console.log(users)
+        //console.log(users)
 
         return res.writeHead(201).end()
     }
