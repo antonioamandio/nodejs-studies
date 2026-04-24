@@ -1,3 +1,7 @@
+# Some files configured manually
+
+db.json
+
 # Logs
 logs
 *.log
