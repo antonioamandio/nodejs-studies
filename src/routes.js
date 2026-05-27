@@ -1,12 +1,26 @@
 import { Database } from './database.js'
 import { randomUUID } from 'node:crypto'
+import { buildRoutePath } from './utils/build-route-path.js'
+// For tests
+import { apiConnection } from './server.js'
 
 const database = new Database()
 
 export const routes = [
     {
         method: 'GET',
-        url: '/users',
+        path: '/health',
+        handler: (req, res) => {
+            console.log(
+                `Server is running on ${apiConnection.URL}:${apiConnection.PORT}`,
+            )
+
+            return res.writeHead(200).end()
+        },
+    },
+    {
+        method: 'GET',
+        path: buildRoutePath('/users'),
         handler: (req, res) => {
             const users = database.select('users')
 
@@ -15,7 +29,7 @@ export const routes = [
     },
     {
         method: 'POST',
-        url: '/users',
+        path: buildRoutePath('/users'),
         handler: (req, res) => {
             const { name, email } = req.body
 
@@ -28,6 +42,13 @@ export const routes = [
             database.insert('users', user)
 
             return res.writeHead(201).end()
+        },
+    },
+    {
+        method: 'DELETE',
+        path: buildRoutePath('/users/:id'),
+        handler: (req, res) => {
+            return res.end()
         },
     },
 ]
