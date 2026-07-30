@@ -9,9 +9,5 @@ export function buildRoutePath(path) {
 
     const pathRegex = new RegExp(`^${pathWithParams}`)
 
-    //console.log(pathWithParams)
-
-    //console.log(Array.from(path.matchAll(routeParametersRegex)))
-
     return pathRegex
 }
