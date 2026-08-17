@@ -9,7 +9,7 @@ const database = new Database()
 export const routes = [
     {
         method: 'GET',
-        path: '/health',
+        path: buildRoutePath('/health'),
         handler: (req, res) => {
             console.log(
                 `Server is running on ${apiConnection.URL}:${apiConnection.PORT}`,
@@ -42,6 +42,18 @@ export const routes = [
             database.insert('users', user)
 
             return res.writeHead(201).end()
+        },
+    },
+    {
+        method: 'PUT',
+        path: buildRoutePath('/users/:id'),
+        handler: (req, res) => {
+            const { id } = req.params
+            const { name, email } = req.body
+
+            database.update('users', id, { name, email })
+
+            return res.writeHead(204).end()
         },
     },
     {
