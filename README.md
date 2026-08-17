@@ -61,8 +61,7 @@ In `package.json`, you may have scripts like:
 ```json
 {
     "scripts": {
-        "start": "node src/index.js",
-        "dev": "nodemon src/index.js"
+        "dev": "node --watch src/server.js"
     }
 }
 ```
