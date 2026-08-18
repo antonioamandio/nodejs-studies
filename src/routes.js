@@ -8,14 +8,25 @@ const database = new Database()
 
 export const routes = [
     {
+        // Endpoint to test API connection
         method: 'GET',
         path: buildRoutePath('/health'),
         handler: (req, res) => {
-            console.log(
-                `Server is running on ${apiConnection.URL}:${apiConnection.PORT}`,
-            )
-
-            return res.writeHead(200).end()
+            try {
+                res.writeHead(200).end(
+                    JSON.stringify({
+                        success: true,
+                        message: 'Server is running',
+                    }),
+                )
+            } catch (error) {
+                res.writeHead(500).end(
+                    JSON.stringify({
+                        success: false,
+                        message: 'Internal server error',
+                    }),
+                )
+            }
         },
     },
     {
